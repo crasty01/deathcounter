@@ -1,0 +1,9 @@
+#app {
+  max-width: var(--max-width);
+  margin: auto;
+  // padding: 0 .5rem;
+  min-height: 100vh;
+  display: grid;
+  gap: 10rem;
+  // grid-template-rows: auto 1fr auto;
+}

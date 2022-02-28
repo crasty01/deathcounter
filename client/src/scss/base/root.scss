@@ -1,0 +1,42 @@
+@use '../abstracts' as *;
+@use "sass:color";
+@use "sass:list";
+
+
+:root {
+  --section-spacing: 3.5rem;
+  --wrapper-padding: 1rem;
+  --max-width: 2000px;
+  --border-width: 2px;
+  --border-radius: .5rem;
+  --base-size: .5rem;
+  --transition-time: 250ms;
+
+  @include mq(small) {
+    --section-spacing: 6rem;
+  }
+
+  @each $name, $hue, $saturation, $lightness in $types {
+    @each $i, $step in $steps {
+      --clr-#{$name}-#{$step}: hsl(#{$hue}, #{$saturation * 1%}, #{$lightness * 1% - ($i * 5%)});
+    }
+  }
+
+  @each $name, $value in $colors {
+    --clr-#{$name}: #{$value};
+  }
+
+  @each $screen-size, $property in $type-scale {
+    @if $screen-size == small {
+      @each $prop, $value in $property {
+        --fs-#{$prop}: #{$value};
+      }
+    } @else {
+      @include mq(small) {
+        @each $prop, $value in $property {
+          --fs-#{$prop}: #{$value};
+        }
+      }
+    }
+  }
+}
