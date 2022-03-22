@@ -4,23 +4,27 @@
   import { onDestroy } from "svelte";
   import { navigate, useParams } from "svelte-navigator";
 
+  const sct = socket();
   const params = useParams();
   let deaths = 0;
 
-  socket.emit("join", { channel: $params.channel }, ({ data, error }) => {
+  const joinfn = ()=>{
+    console.log("connected :)");
+    sct.emit("join", { channel: $params.channel }, ({ data, error }) => {
     if (error) {
       navigate("/?error", { replace: true });
     } else {
       deaths = data?.deaths | 0;
     }
   });
-
-  socket.on("death_change", (data) => {
+  }
+  sct.on("connect", joinfn)
+  sct.on("death_change", (data) => {
     deaths = data?.deaths;
   });
 
   onDestroy(() => {
-    socket.emit("leave", { channel: $params.channel });
+    sct.close()
   });
 </script>
 
