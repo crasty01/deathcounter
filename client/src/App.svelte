@@ -4,9 +4,9 @@
   import Join from "@/component/Join.svelte";
   import { socket } from "@/lib/ws";
 
-  socket.on("connect", () => {
-    console.log("connected :)");
-  });
+  // socket.on("connect", () => {
+  //   console.log("connected :)");
+  // });
   
 </script>
 
