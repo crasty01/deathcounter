@@ -9,7 +9,7 @@ import { useDbs, deta } from '$/lib/dbs';
 import { useServer } from '$/lib/ws';
 
 
-const dbs = useDbs(['crasty', 'cdubya719']);
+const dbs = useDbs(['crasty', 'cdubya719', 'bigfatcelestial']);
 const io = useServer(dbs);
 
 
