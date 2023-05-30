@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { navigate } from "svelte-navigator";
+  import { navigate } from 'svelte-navigator';
 
-  let value = "cdubya719";
+  let value = 'cdubya719';
 
   const handleJoin = () => {
     navigate(value, { replace: false });
@@ -13,12 +13,17 @@
     <label for="channel">channel name:</label>
     <div class="wrapper">
       <div class="input">
-        <input type="text" id="channel" bind:value />
+        <input
+          type="text"
+          id="channel"
+          bind:value
+        />
       </div>
     </div>
   </div>
-  <button class="button button--dark button--wide" on:click={handleJoin}
-    >join</button
+  <button
+    class="button button--dark button--wide"
+    on:click={handleJoin}>join</button
   >
 </div>
 

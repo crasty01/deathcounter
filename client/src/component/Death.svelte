@@ -1,37 +1,40 @@
 <script lang="ts">
-  import image from "@/asset/bonefire.gif";
-  import { socket } from "@/lib/ws";
-  import { onDestroy } from "svelte";
-  import { navigate, useParams } from "svelte-navigator";
+  import image from '../assets/bonefire.gif';
+  import { socket } from '../lib/ws';
+  import { onDestroy } from 'svelte';
+  import { navigate, useParams } from 'svelte-navigator';
 
   const sct = socket();
   const params = useParams();
   let deaths = 0;
 
-  const joinfn = ()=>{
-    console.log("connected :)");
-    sct.emit("join", { channel: $params.channel }, ({ data, error }) => {
-    if (error) {
-      navigate("/?error", { replace: true });
-    } else {
-      deaths = data?.deaths | 0;
-    }
-  });
-  }
-  sct.on("connect", joinfn)
-  sct.on("death_change", (data) => {
+  const joinfn = () => {
+    console.log('connected :)');
+    sct.emit('join', { channel: $params.channel }, ({ data, error }) => {
+      if (error) {
+        navigate('/?error', { replace: true });
+      } else {
+        deaths = data?.deaths | 0;
+      }
+    });
+  };
+  sct.on('connect', joinfn);
+  sct.on('death_change', (data) => {
     deaths = data?.deaths;
   });
 
   onDestroy(() => {
-    sct.close()
+    sct.close();
   });
 </script>
 
 <div class="deaths">
-  <img src={image} alt="bonefire" />
+  <img
+    src={image}
+    alt="bonefire"
+  />
   <span class="text">
-    {deaths}&nbsp;death{Math.abs(deaths) === 1 ? "" : "s"}
+    {deaths}&nbsp;death{Math.abs(deaths) === 1 ? '' : 's'}
   </span>
 </div>
 
