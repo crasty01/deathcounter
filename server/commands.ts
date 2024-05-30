@@ -39,6 +39,7 @@ export const death_handler: CommandHandler = async ({ bot, database, params, con
 			...channel,
 			...game,
 			deaths: death.deaths,
+			channel_display_name: channel_info.displayName,
 		}
 	}));
 	// TODO: broadcast to websocket

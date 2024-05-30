@@ -1,6 +1,6 @@
 export const generate_messages = {
-	join: () => 'MrDestructoid Greetings, mortals! Grim Reaper Bot here, ready to chronicle your comedic demises!',
-	online: () => 'MrDestructoid Grim Reaper Bot is "alive"... again',
+	join: () => 'MrDestructoid Greetings, mortals! Grim Reaper Bot here, ready to chronicle all comedic demises!',
+	online: () => 'MrDestructoid Grim Reaper Bot is alive once again',
 	no_game_found: () => 'PoroSad could not find the game',
 	no_deaths: (
 		channel_name: string,

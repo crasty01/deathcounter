@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @use fonts; */
+
+[data-mode="dark"] {
+	input, textarea {
+		color-scheme: dark;
+	}
+
+	@apply text-surface-50;
+}
+
+html {
+	@apply font-mono;
+}
