@@ -13,7 +13,7 @@ export const useRoutes = ({ router, database, auth, bot }: {
 	bot: Bot,
 }) => {
 	router.get('/', async () => {
-		return new Response('test', { status: 200 });
+		return new Response('Hello, World', { status: 200 });
 	});
 
 	router.get('/search/channel', async (request) => {
@@ -169,18 +169,18 @@ export const useRoutes = ({ router, database, auth, bot }: {
 		return new Response(JSON.stringify(channels), { status: 200 });
 	});
 
-	router.get('/clear', async () => {
-		await Promise.all([
-			database.sql`drop table access_tokens`,
-			database.sql`drop table deaths`,
-			database.sql`drop table channels`,
-			database.sql`drop table games`,
-		]);
+	// router.get('/clear', async () => {
+	// 	await Promise.all([
+	// 		database.sql`drop table access_tokens`,
+	// 		database.sql`drop table deaths`,
+	// 		database.sql`drop table channels`,
+	// 		database.sql`drop table games`,
+	// 	]);
 
-		return new Response('ok', { status: 200 });
-	})
+	// 	return new Response('ok', { status: 200 });
+	// })
 
 	router.get('/*', async () => {
-		return new Response('not found', { status: 404 });
+		return new Response('page not found', { status: 404 });
 	});
 }

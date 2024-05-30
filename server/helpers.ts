@@ -10,7 +10,7 @@ export const generate_messages = {
 		channel_name: string,
 		game_name: string,
 		deaths: number
-	) => `${channel_name} has died ${deaths} time${deaths === 1 ? '' : 's'} playing '${game_name ?? 'test'}'`,
+	) => `${channel_name} has died ${deaths} time${deaths === 1 ? '' : 's'} playing '${game_name ?? 'unknown'}'`,
 } as const;
 
 // export const get_current_game = (bot: Bot, channel_id: string) => {
