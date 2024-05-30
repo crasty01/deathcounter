@@ -37,10 +37,14 @@
 			console.log('connection closed');
 		});
 	}
+
+	import { page } from '$app/stores';
+
+	$: use_greenscreen = $page.url.searchParams.has('greenscreen');
 </script>
 
 <main class="grid place-content-center min-h-[100vh] w-full">
-	<section class="grid place-items-center gap-4 py-10 px-8 bg-surface-900 rounded-md">
+	<section class="grid place-items-center gap-4 py-10 px-8 {use_greenscreen ? 'bg-[#00ff00]' : 'bg-surface-900'} rounded-md">
 		<img src="/bonfire.gif" alt="bonfire">
 		<h1 class="text-4xl font-bold max-w-[16rem] w-full text-center">
 			<span>{data.deaths}</span>
