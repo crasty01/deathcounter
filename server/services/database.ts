@@ -8,7 +8,7 @@ export default class Database {
 	#deaths: Map<string, Map<string, DeathTableRow>>;
 
 	constructor(url: string) {
-		console.log(url);
+		console.log(url, Deno.env.get('DATABASE_URL'));
 		this.#sql = postgres(url, {
 			debug: false,
 			onnotice: (notice) => {
