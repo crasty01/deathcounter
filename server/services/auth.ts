@@ -1,6 +1,6 @@
 import { AccessToken, RefreshingAuthProvider } from '@twurple/auth';
 import type { Sql } from "postgres";
-import { crypto } from "@std/crypto/crypto";
+import { crypto } from "https://deno.land/std@0.224.0/crypto/crypto.ts";
 import { AccessTokenTableRow, AuthProviderOptions } from "/types.ts";
 
 export default class AuthProvider {
