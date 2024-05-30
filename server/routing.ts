@@ -1,186 +1,203 @@
 import { Bot } from "@twurple/easy-bot";
 import AuthProvider from "/services/auth.ts";
 import Database from "/services/database.ts";
-import env from "/services/env.ts";
 import { Router } from "/services/router.ts";
 import { ChannelTableRow } from "/types.ts";
 import { generate_messages } from "/helpers.ts";
 
 export const useRoutes = ({ router, database, auth, bot }: {
-	router: Router,
-	database: Database,
-	auth: AuthProvider,
-	bot: Bot,
+  router: Router;
+  database: Database;
+  auth: AuthProvider;
+  bot: Bot;
 }) => {
-	router.get('/', async () => {
-		return new Response('Hello, World', { status: 200 });
-	});
+  router.get("/", async () => {
+    return new Response("Hello, World", { status: 200 });
+  });
 
-	router.get('/search/channel', async (request) => {
-		const url = new URL(request.url);
-		const search = new URLSearchParams(url.search);
-		const channel_id = search.has('channel_id') ? decodeURIComponent(search.get('channel_id')!) : null;
-		const channel_name = search.has('channel_name') ? decodeURIComponent(search.get('channel_name')!) : null;
-		console.log({ url, search, channel_id, channel_name });
+  router.get("/search/channel", async (request) => {
+    const url = new URL(request.url);
+    const search = new URLSearchParams(url.search);
+    const channel_id = search.has("channel_id")
+      ? decodeURIComponent(search.get("channel_id")!)
+      : null;
+    const channel_name = search.has("channel_name")
+      ? decodeURIComponent(search.get("channel_name")!)
+      : null;
+    console.log({ url, search, channel_id, channel_name });
 
-		if (channel_id === null && channel_name === null) {
-			return new Response('no channel_id or channel_name', { status: 401 });
-		}
+    if (channel_id === null && channel_name === null) {
+      return new Response("no channel_id or channel_name", { status: 401 });
+    }
 
-		let channel: ChannelTableRow | undefined;
+    let channel: ChannelTableRow | undefined;
 
-		if (channel_id) {
-			console.log('searching by channel_id:', channel_id)
-			channel = await database.getChannelById(channel_id);
-		}
-		if (!channel && channel_name) {
-			channel = await database.getChannelByName(channel_name.toLowerCase());
-		}
+    if (channel_id) {
+      console.log("searching by channel_id:", channel_id);
+      channel = await database.getChannelById(channel_id);
+    }
+    if (!channel && channel_name) {
+      channel = await database.getChannelByName(channel_name.toLowerCase());
+    }
 
-		if (channel) {
-			return new Response(JSON.stringify(channel), { status: 200 });
-		} else {
-			return new Response('no channel found', { status: 404 });
-		}
-	});
+    if (channel) {
+      return new Response(JSON.stringify(channel), { status: 200 });
+    } else {
+      return new Response("no channel found", { status: 404 });
+    }
+  });
 
-	router.get('/search/game', async (request) => {
-		const url = new URL(request.url);
-		const search = new URLSearchParams(url.search);
-		const game_id = search.has('game_id') ? decodeURIComponent(search.get('game_id')!) : null;
+  router.get("/search/game", async (request) => {
+    const url = new URL(request.url);
+    const search = new URLSearchParams(url.search);
+    const game_id = search.has("game_id")
+      ? decodeURIComponent(search.get("game_id")!)
+      : null;
 
-		if (game_id === null) {
-			return new Response('no game_id', { status: 401 });
-		}
+    if (game_id === null) {
+      return new Response("no game_id", { status: 401 });
+    }
 
-		const game = await database.getGameById(decodeURIComponent(game_id));
+    const game = await database.getGameById(decodeURIComponent(game_id));
 
-		if (game) {
-			return new Response(JSON.stringify(game), { status: 200 });
-		} else {
-			return new Response('no channel found', { status: 404 });
-		}
-	});
+    if (game) {
+      return new Response(JSON.stringify(game), { status: 200 });
+    } else {
+      return new Response("no channel found", { status: 404 });
+    }
+  });
 
-	router.get('/channel/:channel_name', async (_, params) => {
-		const channel_name = params.channel_name;
-		let channel = database.channel_list.find((channel) => channel.channel_name === channel_name);
+  router.get("/channel/:channel_name", async (_, params) => {
+    const channel_name = params.channel_name;
+    let channel = database.channel_list.find((channel) =>
+      channel.channel_name === channel_name
+    );
 
-		const user_info = await bot.api.users.getUserByName(channel_name);
-		if (!user_info) throw new Error('no user found');
-		
-		const channel_info = await bot.api.channels.getChannelInfoById(user_info.id);
-		if (!channel_info) throw new Error('no channel found');
+    const user_info = await bot.api.users.getUserByName(channel_name);
+    if (!user_info) throw new Error("no user found");
 
-		if (!channel) {
-			
-			await bot.join(channel_name);
-			await bot.say(channel_name, generate_messages.join());
-			await database.createOrUpdateDeath({
-				channel_id: channel_info.id,
-				channel_name: channel_info.name,
-			}, {
-				game_id: channel_info.gameId,
-				game_name: channel_info.gameName,
-			}, 0);
+    const channel_info = await bot.api.channels.getChannelInfoById(
+      user_info.id,
+    );
+    if (!channel_info) throw new Error("no channel found");
 
-			channel = database.channels.get(channel_info.id);
-		}
+    if (!channel) {
+      await bot.join(channel_name);
+      await bot.say(channel_name, generate_messages.join());
+      await database.createOrUpdateDeath({
+        channel_id: channel_info.id,
+        channel_name: channel_info.name,
+      }, {
+        game_id: channel_info.gameId,
+        game_name: channel_info.gameName,
+      }, 0);
 
-		const deaths = database.deaths.get(channel_info.id)?.get(channel_info.gameId);
+      channel = database.channels.get(channel_info.id);
+    }
 
-		return new Response(JSON.stringify({
-			channel_id: channel_info.id,
-			channel_name: channel_info.name,
-			channel_display_name: channel_info.displayName,
-			game_id: channel_info.gameId,
-			game_name: channel_info.gameName,
-			deaths: deaths?.deaths,
-		}), { status: 200 });
-	});
+    const deaths = database.deaths.get(channel_info.id)?.get(
+      channel_info.gameId,
+    );
 
-	router.get('/auth/initialize', async () => {
-		if (auth.provider.hasUser(env.ADMIN_USER_ID)) {
-			return new Response('user alrady exists', { status: 401 });
-		}
+    return new Response(
+      JSON.stringify({
+        channel_id: channel_info.id,
+        channel_name: channel_info.name,
+        channel_display_name: channel_info.displayName,
+        game_id: channel_info.gameId,
+        game_name: channel_info.gameName,
+        deaths: deaths?.deaths,
+      }),
+      { status: 200 },
+    );
+  });
 
-		const url = new URL('https://id.twitch.tv/oauth2/authorize');
-		const params = new URLSearchParams({
-			client_id: env.TWITCH_CLIENT_ID,
-			redirect_uri: new URL('/auth/callback', env.SERVER_URL).toString(),
-			response_type: 'code',
-			scope: 'chat:read chat:edit',
-		});
+  router.get("/auth/initialize", async () => {
+    if (auth.provider.hasUser(Deno.env.get("ADMIN_USER_ID")!)) {
+      return new Response("user alrady exists", { status: 401 });
+    }
 
-		return Response.redirect(`${url.origin}${url.pathname}?${params}`);
-	});
+    const url = new URL("https://id.twitch.tv/oauth2/authorize");
+    const params = new URLSearchParams({
+      client_id: Deno.env.get("TWITCH_CLIENT_ID")!,
+      redirect_uri: new URL("/auth/callback", Deno.env.get("SERVER_URL")!)
+        .toString(),
+      response_type: "code",
+      scope: "chat:read chat:edit",
+    });
 
-	router.get('/auth/callback', async (request) => {
-		if (auth.provider.hasUser(env.ADMIN_USER_ID)) {
-			return new Response('user alrady exists', { status: 401 });
-		}
+    return Response.redirect(`${url.origin}${url.pathname}?${params}`);
+  });
 
-		const code = new URLSearchParams((new URL(request.url)).search).get('code');
+  router.get("/auth/callback", async (request) => {
+    if (auth.provider.hasUser(Deno.env.get("ADMIN_USER_ID")!)) {
+      return new Response("user alrady exists", { status: 401 });
+    }
 
-		if (code === null) {
-			return new Response('no code provided', { status: 401 });
-		}
-		
-		const url = new URL('https://id.twitch.tv/oauth2/token');
-		const params = new URLSearchParams({
-			client_id: env.TWITCH_CLIENT_ID,
-			client_secret: env.TWITCH_CLIENT_SECRET,
-			grant_type: 'authorization_code',
-			redirect_uri: new URL('/auth/callback', env.SERVER_URL).toString(),
-			code,
-		});
+    const code = new URLSearchParams((new URL(request.url)).search).get("code");
 
-		const res = await fetch(`${url.origin}${url.pathname}?${params}`, { method: 'POST' });
-		const token: {
-			access_token: string;
-			expires_in: number;
-			refresh_token: string;
-			scope: Array<string>;
-			token_type: string;
-		} = await res.json();
+    if (code === null) {
+      return new Response("no code provided", { status: 401 });
+    }
 
-		if (token) {
-			await auth.add_user_for_token({
-				accessToken: token.access_token,
-				expiresIn: token.expires_in,
-				obtainmentTimestamp: Date.now(),
-				refreshToken: token.refresh_token,
-				scope: token.scope,
-			});
-			auth.provider.addIntentsToUser(env.ADMIN_USER_ID, ['chat']);
-			return new Response('ok', { status: 200 });
-		} else {
-			return new Response('no token recieved', { status: 500 });
-		}
-	});
+    const url = new URL("https://id.twitch.tv/oauth2/token");
+    const params = new URLSearchParams({
+      client_id: Deno.env.get("TWITCH_CLIENT_ID")!,
+      client_secret: Deno.env.get("TWITCH_CLIENT_SECRET")!,
+      grant_type: "authorization_code",
+      redirect_uri: new URL("/auth/callback", Deno.env.get("SERVER_URL")!)
+        .toString(),
+      code,
+    });
 
-	router.get('/channel', async () => {
-		const channels = database.channels;
-		return new Response(JSON.stringify(channels), { status: 200 });
-	});
+    const res = await fetch(`${url.origin}${url.pathname}?${params}`, {
+      method: "POST",
+    });
+    const token: {
+      access_token: string;
+      expires_in: number;
+      refresh_token: string;
+      scope: Array<string>;
+      token_type: string;
+    } = await res.json();
 
-	router.get('/game', async () => {
-		const channels = database.games;
-		return new Response(JSON.stringify(channels), { status: 200 });
-	});
+    if (token) {
+      await auth.add_user_for_token({
+        accessToken: token.access_token,
+        expiresIn: token.expires_in,
+        obtainmentTimestamp: Date.now(),
+        refreshToken: token.refresh_token,
+        scope: token.scope,
+      });
+      auth.provider.addIntentsToUser(Deno.env.get("ADMIN_USER_ID")!, ["chat"]);
+      return new Response("ok", { status: 200 });
+    } else {
+      return new Response("no token recieved", { status: 500 });
+    }
+  });
 
-	// router.get('/clear', async () => {
-	// 	await Promise.all([
-	// 		database.sql`drop table access_tokens`,
-	// 		database.sql`drop table deaths`,
-	// 		database.sql`drop table channels`,
-	// 		database.sql`drop table games`,
-	// 	]);
+  router.get("/channel", async () => {
+    const channels = database.channels;
+    return new Response(JSON.stringify(channels), { status: 200 });
+  });
 
-	// 	return new Response('ok', { status: 200 });
-	// })
+  router.get("/game", async () => {
+    const channels = database.games;
+    return new Response(JSON.stringify(channels), { status: 200 });
+  });
 
-	router.get('/*', async () => {
-		return new Response('page not found', { status: 404 });
-	});
-}
+  // router.get('/clear', async () => {
+  // 	await Promise.all([
+  // 		database.sql`drop table access_tokens`,
+  // 		database.sql`drop table deaths`,
+  // 		database.sql`drop table channels`,
+  // 		database.sql`drop table games`,
+  // 	]);
+
+  // 	return new Response('ok', { status: 200 });
+  // })
+
+  router.get("/*", async () => {
+    return new Response("page not found", { status: 404 });
+  });
+};

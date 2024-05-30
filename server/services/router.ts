@@ -66,9 +66,13 @@ export class Router {
     for (const r of this.routes[request.method]) {
       if (r.pattern.test(request.url)) {
         const params = Object.fromEntries(
-					([...Object.entries(r.pattern.exec(request.url).pathname.groups)] as Array<[string, string | null]>)
-						.map(([key, value]) => ([decodeURIComponent(key), value && decodeURIComponent(value)]))
-				);
+          ([...Object.entries(
+            r.pattern.exec(request.url).pathname.groups,
+          )] as Array<[string, string | null]>)
+            .map((
+              [key, value],
+            ) => [decodeURIComponent(key), value && decodeURIComponent(value)]),
+        );
         try {
           return await r["handler"](request, params);
         } catch (err) {
