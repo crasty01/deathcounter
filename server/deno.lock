@@ -1,0 +1,240 @@
+{
+  "version": "3",
+  "packages": {
+    "specifiers": {
+      "npm:@twurple/auth@^7.1.0": "npm:@twurple/auth@7.1.0",
+      "npm:@twurple/easy-bot@^7.1.0": "npm:@twurple/easy-bot@7.1.0_@twurple+auth@7.1.0",
+      "npm:postgres@^3.4.4": "npm:postgres@3.4.4"
+    },
+    "npm": {
+      "@d-fischer/cache-decorators@4.0.1": {
+        "integrity": "sha512-HNYLBLWs/t28GFZZeqdIBqq8f37mqDIFO6xNPof94VjpKvuP6ROqCZGafx88dk5zZUlBfViV9jD8iNNlXfc4CA==",
+        "dependencies": {
+          "@d-fischer/shared-utils": "@d-fischer/shared-utils@3.6.3",
+          "tslib": "tslib@2.6.2"
+        }
+      },
+      "@d-fischer/connection@9.0.0_ws@8.17.0": {
+        "integrity": "sha512-Mljp/EbaE+eYWfsFXUOk+RfpbHgrWGL/60JkAvjYixw6KREfi5r17XdUiXe54ByAQox6jwgdN2vebdmW1BT+nQ==",
+        "dependencies": {
+          "@d-fischer/isomorphic-ws": "@d-fischer/isomorphic-ws@7.0.2_ws@8.17.0",
+          "@d-fischer/logger": "@d-fischer/logger@4.2.3",
+          "@d-fischer/shared-utils": "@d-fischer/shared-utils@3.6.3",
+          "@d-fischer/typed-event-emitter": "@d-fischer/typed-event-emitter@3.3.3",
+          "@types/ws": "@types/ws@8.5.10",
+          "tslib": "tslib@2.6.2",
+          "ws": "ws@8.17.0"
+        }
+      },
+      "@d-fischer/cross-fetch@5.0.5": {
+        "integrity": "sha512-symjDUPInTrkfIsZc2n2mo9hiAJLcTJsZkNICjZajEWnWpJ3s3zn50/FY8xpNUAf5w3eFuQii2wxztTGpvG1Xg==",
+        "dependencies": {
+          "node-fetch": "node-fetch@2.7.0"
+        }
+      },
+      "@d-fischer/deprecate@2.0.2": {
+        "integrity": "sha512-wlw3HwEanJFJKctwLzhfOM6LKwR70FPfGZGoKOhWBKyOPXk+3a9Cc6S9zhm6tka7xKtpmfxVIReGUwPnMbIaZg==",
+        "dependencies": {}
+      },
+      "@d-fischer/detect-node@3.0.1": {
+        "integrity": "sha512-0Rf3XwTzuTh8+oPZW9SfxTIiL+26RRJ0BRPwj5oVjZFyFKmsj9RGfN2zuTRjOuA3FCK/jYm06HOhwNK+8Pfv8w==",
+        "dependencies": {}
+      },
+      "@d-fischer/escape-string-regexp@5.0.0": {
+        "integrity": "sha512-7eoxnxcto5eVPW5h1T+ePnVFukmI9f/ZR9nlBLh1t3kyzJDUNor2C+YW9H/Terw3YnbZSDgDYrpCJCHtOtAQHw==",
+        "dependencies": {}
+      },
+      "@d-fischer/isomorphic-ws@7.0.2_ws@8.17.0": {
+        "integrity": "sha512-xK+qIJUF0ne3dsjq5Y3BviQ4M+gx9dzkN+dPP7abBMje4YRfow+X9jBgeEoTe5e+Q6+8hI9R0b37Okkk8Vf0hQ==",
+        "dependencies": {
+          "ws": "ws@8.17.0"
+        }
+      },
+      "@d-fischer/logger@4.2.3": {
+        "integrity": "sha512-mJUx9OgjrNVLQa4od/+bqnmD164VTCKnK5B4WOW8TX5y/3w2i58p+PMRE45gUuFjk2BVtOZUg55JQM3d619fdw==",
+        "dependencies": {
+          "@d-fischer/detect-node": "@d-fischer/detect-node@3.0.1",
+          "@d-fischer/shared-utils": "@d-fischer/shared-utils@3.6.3",
+          "tslib": "tslib@2.6.2"
+        }
+      },
+      "@d-fischer/qs@7.0.2": {
+        "integrity": "sha512-yAu3xDooiL+ef84Jo8nLjDjWBRk7RXk163Y6aTvRB7FauYd3spQD/dWvgT7R4CrN54Juhrrc3dMY7mc+jZGurQ==",
+        "dependencies": {}
+      },
+      "@d-fischer/rate-limiter@1.0.1": {
+        "integrity": "sha512-Mq+0pAJsx92hP83cjmsrXQZVQJ+/+u1JFT6fjH8pj3yfUrbT3eDBsA+6J63eat+QaC+Mci78HdiBfpsdBkdwog==",
+        "dependencies": {
+          "@d-fischer/logger": "@d-fischer/logger@4.2.3",
+          "@d-fischer/shared-utils": "@d-fischer/shared-utils@3.6.3",
+          "tslib": "tslib@2.6.2"
+        }
+      },
+      "@d-fischer/shared-utils@3.6.3": {
+        "integrity": "sha512-Lz+Qk1WJLVoeREOHPZcIDTHOoxecxMSG2sq+x1xWYCH1exqiMKMMx06pXdy15UzHG7ohvQRNXk2oHqZ9EOl9jQ==",
+        "dependencies": {
+          "tslib": "tslib@2.6.2"
+        }
+      },
+      "@d-fischer/typed-event-emitter@3.3.3": {
+        "integrity": "sha512-OvSEOa8icfdWDqcRtjSEZtgJTFOFNgTjje7zaL0+nAtu2/kZtRCSK5wUMrI/aXtCH8o0Qz2vA8UqkhWUTARFQQ==",
+        "dependencies": {
+          "tslib": "tslib@2.6.2"
+        }
+      },
+      "@twurple/api-call@7.1.0": {
+        "integrity": "sha512-aiyV492StnILyFzU/Eqgn+BA8fz125sB/0QJVlCJotMolrZxBkA4NsFEGDOcR3rOJLL7zOKPYMhWI8zY0gfzPA==",
+        "dependencies": {
+          "@d-fischer/cross-fetch": "@d-fischer/cross-fetch@5.0.5",
+          "@d-fischer/qs": "@d-fischer/qs@7.0.2",
+          "@d-fischer/shared-utils": "@d-fischer/shared-utils@3.6.3",
+          "@twurple/common": "@twurple/common@7.1.0",
+          "tslib": "tslib@2.6.2"
+        }
+      },
+      "@twurple/api@7.1.0_@twurple+auth@7.1.0": {
+        "integrity": "sha512-cDVVY+vecMFNEOyp7UobQn4ARydIDf04NZy1YCKIKpJHBuOV/pkTjNGluRZ0nR9/t9hBFfOyHAH4JswRZpZbnw==",
+        "dependencies": {
+          "@d-fischer/cache-decorators": "@d-fischer/cache-decorators@4.0.1",
+          "@d-fischer/cross-fetch": "@d-fischer/cross-fetch@5.0.5",
+          "@d-fischer/detect-node": "@d-fischer/detect-node@3.0.1",
+          "@d-fischer/logger": "@d-fischer/logger@4.2.3",
+          "@d-fischer/rate-limiter": "@d-fischer/rate-limiter@1.0.1",
+          "@d-fischer/shared-utils": "@d-fischer/shared-utils@3.6.3",
+          "@d-fischer/typed-event-emitter": "@d-fischer/typed-event-emitter@3.3.3",
+          "@twurple/api-call": "@twurple/api-call@7.1.0",
+          "@twurple/auth": "@twurple/auth@7.1.0",
+          "@twurple/common": "@twurple/common@7.1.0",
+          "retry": "retry@0.13.1",
+          "tslib": "tslib@2.6.2"
+        }
+      },
+      "@twurple/auth@7.1.0": {
+        "integrity": "sha512-OT7XtoXeYA8yLvCKdIZ76x71D/RfxPZQqufpimy5ZSL4+TpxY1CJNFp8YWstC1KEfyGVwyr7ZoV49u95k0JJmw==",
+        "dependencies": {
+          "@d-fischer/logger": "@d-fischer/logger@4.2.3",
+          "@d-fischer/shared-utils": "@d-fischer/shared-utils@3.6.3",
+          "@d-fischer/typed-event-emitter": "@d-fischer/typed-event-emitter@3.3.3",
+          "@twurple/api-call": "@twurple/api-call@7.1.0",
+          "@twurple/common": "@twurple/common@7.1.0",
+          "tslib": "tslib@2.6.2"
+        }
+      },
+      "@twurple/chat@7.1.0_@twurple+auth@7.1.0": {
+        "integrity": "sha512-AzLtq+xqbyYpqPZau5jvX3Dov+C7MW1YTunYZZ5TqyQlEb/leUD6LdwdhXhsVxQUfpVD1FhU1NSlNd7VEhv0Rg==",
+        "dependencies": {
+          "@d-fischer/cache-decorators": "@d-fischer/cache-decorators@4.0.1",
+          "@d-fischer/deprecate": "@d-fischer/deprecate@2.0.2",
+          "@d-fischer/logger": "@d-fischer/logger@4.2.3",
+          "@d-fischer/rate-limiter": "@d-fischer/rate-limiter@1.0.1",
+          "@d-fischer/shared-utils": "@d-fischer/shared-utils@3.6.3",
+          "@d-fischer/typed-event-emitter": "@d-fischer/typed-event-emitter@3.3.3",
+          "@twurple/auth": "@twurple/auth@7.1.0",
+          "@twurple/common": "@twurple/common@7.1.0",
+          "ircv3": "ircv3@0.33.0",
+          "tslib": "tslib@2.6.2"
+        }
+      },
+      "@twurple/common@7.1.0": {
+        "integrity": "sha512-kz3J9J116+aOdyhCzRQwaxFC5eAewwQ9Iv2UmPHXYqRfbgKay6TsL27vk+Q2HygBCvx/8OWpX3pdSo3V/VPmoA==",
+        "dependencies": {
+          "@d-fischer/shared-utils": "@d-fischer/shared-utils@3.6.3",
+          "klona": "klona@2.0.6",
+          "tslib": "tslib@2.6.2"
+        }
+      },
+      "@twurple/easy-bot@7.1.0_@twurple+auth@7.1.0": {
+        "integrity": "sha512-NBuNIAS3aJYzdDMr48kNbc1RdnmKL/abJf5HJgnlE7PP/ndthQYS3S/RaNkR/DIouvbJAmgSsYRj/7UlyZ3lZQ==",
+        "dependencies": {
+          "@d-fischer/logger": "@d-fischer/logger@4.2.3",
+          "@d-fischer/shared-utils": "@d-fischer/shared-utils@3.6.3",
+          "@d-fischer/typed-event-emitter": "@d-fischer/typed-event-emitter@3.3.3",
+          "@twurple/api": "@twurple/api@7.1.0_@twurple+auth@7.1.0",
+          "@twurple/auth": "@twurple/auth@7.1.0",
+          "@twurple/chat": "@twurple/chat@7.1.0_@twurple+auth@7.1.0",
+          "@twurple/common": "@twurple/common@7.1.0",
+          "tslib": "tslib@2.6.2"
+        }
+      },
+      "@types/node@18.16.19": {
+        "integrity": "sha512-IXl7o+R9iti9eBW4Wg2hx1xQDig183jj7YLn8F7udNceyfkbn1ZxmzZXuak20gR40D7pIkIY1kYGx5VIGbaHKA==",
+        "dependencies": {}
+      },
+      "@types/ws@8.5.10": {
+        "integrity": "sha512-vmQSUcfalpIq0R9q7uTo2lXs6eGIpt9wtnLdMv9LVpIjCA/+ufZRozlVoVelIYixx1ugCBKDhn89vnsEGOCx9A==",
+        "dependencies": {
+          "@types/node": "@types/node@18.16.19"
+        }
+      },
+      "ircv3@0.33.0": {
+        "integrity": "sha512-7rK1Aial3LBiFycE8w3MHiBBFb41/2GG2Ll/fR2IJj1vx0pLpn1s+78K+z/I4PZTqCCSp/Sb4QgKMh3NMhx0Kg==",
+        "dependencies": {
+          "@d-fischer/connection": "@d-fischer/connection@9.0.0_ws@8.17.0",
+          "@d-fischer/escape-string-regexp": "@d-fischer/escape-string-regexp@5.0.0",
+          "@d-fischer/logger": "@d-fischer/logger@4.2.3",
+          "@d-fischer/shared-utils": "@d-fischer/shared-utils@3.6.3",
+          "@d-fischer/typed-event-emitter": "@d-fischer/typed-event-emitter@3.3.3",
+          "klona": "klona@2.0.6",
+          "tslib": "tslib@2.6.2"
+        }
+      },
+      "klona@2.0.6": {
+        "integrity": "sha512-dhG34DXATL5hSxJbIexCft8FChFXtmskoZYnoPWjXQuebWYCNkVeV3KkGegCK9CP1oswI/vQibS2GY7Em/sJJA==",
+        "dependencies": {}
+      },
+      "node-fetch@2.7.0": {
+        "integrity": "sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==",
+        "dependencies": {
+          "whatwg-url": "whatwg-url@5.0.0"
+        }
+      },
+      "postgres@3.4.4": {
+        "integrity": "sha512-IbyN+9KslkqcXa8AO9fxpk97PA4pzewvpi2B3Dwy9u4zpV32QicaEdgmF3eSQUzdRk7ttDHQejNgAEr4XoeH4A==",
+        "dependencies": {}
+      },
+      "retry@0.13.1": {
+        "integrity": "sha512-XQBQ3I8W1Cge0Seh+6gjj03LbmRFWuoszgK9ooCpwYIrhhoO80pfq4cUkU5DkknwfOfFteRwlZ56PYOGYyFWdg==",
+        "dependencies": {}
+      },
+      "tr46@0.0.3": {
+        "integrity": "sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==",
+        "dependencies": {}
+      },
+      "tslib@2.6.2": {
+        "integrity": "sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==",
+        "dependencies": {}
+      },
+      "webidl-conversions@3.0.1": {
+        "integrity": "sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==",
+        "dependencies": {}
+      },
+      "whatwg-url@5.0.0": {
+        "integrity": "sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==",
+        "dependencies": {
+          "tr46": "tr46@0.0.3",
+          "webidl-conversions": "webidl-conversions@3.0.1"
+        }
+      },
+      "ws@8.17.0": {
+        "integrity": "sha512-uJq6108EgZMAl20KagGkzCKfMEjxmKvZHG7Tlq0Z6nOky7YF7aq4mOx6xK8TJ/i1LeK4Qus7INktacctDgY8Ow==",
+        "dependencies": {}
+      }
+    }
+  },
+  "remote": {
+    "https://deno.land/std@0.224.0/crypto/_wasm/lib/deno_std_wasm_crypto.generated.mjs": "7cd490ae1553c97459bd02de4c3f0a552768a85621949b2366003f3cf84b99d7",
+    "https://deno.land/std@0.224.0/crypto/_wasm/mod.ts": "e89fbbc3c4722602ff975dd85f18273c7741ec766a9b68f6de4fd1d9876409f8",
+    "https://deno.land/std@0.224.0/crypto/crypto.ts": "e58d78f3db111a499261dbab037ec78cc89da0516a50e1f0205665980a3417e3",
+    "https://deno.land/std@0.224.0/dotenv/mod.ts": "0180eaeedaaf88647318811cdaa418cc64dc51fb08354f91f5f480d0a1309f7d",
+    "https://deno.land/std@0.224.0/dotenv/parse.ts": "09977ff88dfd1f24f9973a338f0f91bbdb9307eb5ff6085446e7c423e4c7ba0c",
+    "https://deno.land/std@0.224.0/dotenv/stringify.ts": "275da322c409170160440836342eaa7cf012a1d11a7e700d8ca4e7f2f8aa4615"
+  },
+  "workspace": {
+    "dependencies": [
+      "npm:@twurple/api@^7.1.0",
+      "npm:@twurple/auth@^7.1.0",
+      "npm:@twurple/easy-bot@^7.1.0",
+      "npm:postgres@^3.4.4"
+    ]
+  }
+}

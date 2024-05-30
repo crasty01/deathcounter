@@ -63,8 +63,13 @@ useRoutes({ router, database, auth, bot });
 
 // SERVER ----------------------------------------------
 console.log('[SERVER]');
+const PORT = parseInt(Deno.env.get("PORT") ?? "8000");
 const SOCKET_PATTERN = new URLPattern({ pathname: '/:channel_id' });
-Deno.serve((req) => {
+
+Deno.serve({
+	port: PORT,
+
+}, (req) => {
 	const match = SOCKET_PATTERN.exec(req.url);
 	const channel_id = match?.pathname.groups.channel_id ?? null;
 	const is_websocket = req.headers.get("upgrade") === "websocket";
