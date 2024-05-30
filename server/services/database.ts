@@ -8,6 +8,7 @@ export default class Database {
 	#deaths: Map<string, Map<string, DeathTableRow>>;
 
 	constructor(url: string) {
+		console.log(url);
 		this.#sql = postgres(url, {
 			debug: false,
 			onnotice: (notice) => {
