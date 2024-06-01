@@ -177,12 +177,12 @@ export const useRoutes = ({ router, database, auth, bot }: {
   });
 
   router.get("/channel", async () => {
-    const channels = database.channels;
+    const channels = database.channel_list;
     return new Response(JSON.stringify(channels), { status: 200 });
   });
 
   router.get("/game", async () => {
-    const channels = database.games;
+    const channels = database.game_list;
     return new Response(JSON.stringify(channels), { status: 200 });
   });
 
