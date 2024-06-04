@@ -83,6 +83,7 @@ export const useRoutes = ({ router, database, auth, bot }: {
 
     if (!channel) {
       await bot.join(channel_name);
+			await new Promise((resolve) => setTimeout(resolve, parseInt(Deno.env.get('MESSAGE_TIMEOUT') ?? '0') || 0));
       await bot.say(channel_name, generate_messages.join());
       await database.createOrUpdateDeath({
         channel_id: channel_info.id,

@@ -23,6 +23,7 @@ export const death_handler: CommandHandler = async (
       channel_info.gameId &&
       channel_info.gameName)
   ) {
+		await new Promise((resolve) => setTimeout(resolve, parseInt(Deno.env.get('MESSAGE_TIMEOUT') ?? '0') || 0));
     await bot.say(context.broadcasterName, generate_messages.no_game_found());
     return;
   }
@@ -67,6 +68,7 @@ export const deaths_handler: CommandHandler = async (
       channel_info.gameId &&
       channel_info.gameName)
   ) {
+		await new Promise((resolve) => setTimeout(resolve, parseInt(Deno.env.get('MESSAGE_TIMEOUT') ?? '0') || 0));
     await bot.say(context.broadcasterName, generate_messages.no_game_found());
     return;
   }
@@ -75,6 +77,7 @@ export const deaths_handler: CommandHandler = async (
     channel_info?.gameId!,
   );
   if (!death || death.deaths === 0) {
+		await new Promise((resolve) => setTimeout(resolve, parseInt(Deno.env.get('MESSAGE_TIMEOUT') ?? '0') || 0));
     await bot.say(
       channel_info.name,
       generate_messages.no_deaths(
@@ -83,6 +86,7 @@ export const deaths_handler: CommandHandler = async (
       ),
     );
   } else {
+		await new Promise((resolve) => setTimeout(resolve, parseInt(Deno.env.get('MESSAGE_TIMEOUT') ?? '0') || 0));
     await bot.say(
       channel_info.name,
       generate_messages.deaths(
