@@ -48,10 +48,13 @@ const bot = new Bot({
   ],
 });
 
+// CHANNELS ----------------------------------------------
+console.log("[CHANNELS]");
 await Promise.allSettled(
   database.channel_list.map(({ channel_name }) =>
     new Promise((resolve, reject) => {
       bot.join(channel_name).then(() => {
+				if (Deno.env.get("ENVIRONMENT") === 'development') return resolve(undefined); // do not log hello message if in dev mode
         bot.say(channel_name, generate_messages.online()).then(resolve).catch(
           reject,
         );

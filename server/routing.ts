@@ -113,6 +113,34 @@ export const useRoutes = ({ router, database, auth, bot }: {
     );
   });
 
+	router.get("/deaths/:channel_id", async (_, params) => {
+    const channel_id = params.channel_id;
+    let channel = database.channels.get(channel_id);
+
+		if (!channel) throw new Error("no channel found");
+
+    const deaths = database.deaths.get(channel_id)?.values()
+
+		if (deaths) {
+			return new Response(
+				JSON.stringify([...deaths].map((death) => {
+					const game = database.games.get(death.game_id);
+					return {
+						...death,
+						game_name: game?.game_name,
+					}
+				})),
+				{ status: 200 },
+			);
+		} else {
+			return new Response(
+				JSON.stringify([]),
+				{ status: 200 },
+			);
+		}
+
+  });
+
   router.get("/auth/initialize", async () => {
     if (auth.provider.hasUser(Deno.env.get("ADMIN_USER_ID")!)) {
       return new Response("user alrady exists", { status: 401 });

@@ -5,6 +5,8 @@ export const death_handler: CommandHandler = async (
   { bot, database, params, context, socket },
 ) => {
   const userInfo = context.msg.userInfo;
+
+	if (Deno.env.get("ENVIRONMENT") === 'development' && userInfo.userId !== Deno.env.get("ADMIN_USER_ID")!) return;
   if (
     !(
       userInfo.isMod ||
@@ -14,9 +16,7 @@ export const death_handler: CommandHandler = async (
     )
   ) return;
 
-  const channel_info = await bot.api.channels.getChannelInfoById(
-    context.broadcasterId,
-  );
+  const channel_info = await bot.api.channels.getChannelInfoById(context.broadcasterId);
   if (
     !(true &&
       channel_info &&
@@ -58,9 +58,11 @@ export const death_handler: CommandHandler = async (
 export const deaths_handler: CommandHandler = async (
   { bot, database, context },
 ) => {
-  const channel_info = await bot.api.channels.getChannelInfoById(
-    context.broadcasterId,
-  );
+  const userInfo = context.msg.userInfo;
+
+	if (Deno.env.get("ENVIRONMENT") === 'development' && userInfo.userId !== Deno.env.get("ADMIN_USER_ID")!) return;
+
+  const channel_info = await bot.api.channels.getChannelInfoById(context.broadcasterId);
 
   if (
     !(true &&
